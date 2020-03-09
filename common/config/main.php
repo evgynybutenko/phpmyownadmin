@@ -1,4 +1,8 @@
 <?php
+
+use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
+use src\Modules\Category\Infrastructure\Repository\CategoryRepository;
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -10,4 +14,9 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
+    'container' => [
+        'singletons' => [
+            CategoryRepositoryInterface::class => CategoryRepository::class
+        ]
+    ]
 ];

@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -12,6 +13,21 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
+
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private $categoryRepository;
+
+    public function __construct($id, $module,
+                                CategoryRepositoryInterface $categoryRepository,
+                                $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->categoryRepository = $categoryRepository;
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -70,6 +86,10 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $categories = $this->categoryRepository->findAll();
+
+
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -82,8 +102,11 @@ class SiteController extends Controller
 
             return $this->render('login', [
                 'model' => $model,
+                'categories' => $categories,
             ]);
         }
+
+
     }
 
     /**

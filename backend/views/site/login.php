@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
+/* @var $categories array */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -29,7 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
+                <?php
+                print_r($categories[0]->category_name);
+                ?>
+
             <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
+
+
