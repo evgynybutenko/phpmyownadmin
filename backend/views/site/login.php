@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 /* @var $categories array */
+/* @var $categoryItems array */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -11,32 +12,34 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+<div class="accordion">
+<?php
+$mass = [];
+foreach ($categories as $category) {
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-                <?php
-                print_r($categories[0]->category_name);
-                ?>
-
-            <?php ActiveForm::end(); ?>
+    echo "
+    <div class=\"trigger\">
+        <input type=\"checkbox\" id=\"checkbox-{$category->id}\" name=\"checkbox-{$category->id}\" />
+        <label for=\"checkbox-{$category->id}\" class=\"checkbox\">
+            {$category->category_name} <i></i>
+        </label>
+        <div class=\"content\">
+            <ul>";
+                for($i = 0; $i < count($categoryItems); $i++)
+                {
+                    if($categoryItems[$i]->id_category === $category->id)
+                    {
+                        echo "
+                            <a id=\"ul_a\"><li>{$categoryItems[$i]->item_name}</li></a>
+                        ";
+                    }
+                }
+    echo "  </ul>
         </div>
-    </div>
+    </div>";
+}
+?>
 </div>
-
-

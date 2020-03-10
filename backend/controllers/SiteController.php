@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use Yii;
 use yii\web\Controller;
@@ -13,19 +14,27 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
-
     /**
      * @var CategoryRepositoryInterface
      */
+    /**
+     * @var CategoryItemRepositoryInterface
+     */
     private $categoryRepository;
+    private $categoryItemRepository;
 
     public function __construct($id, $module,
                                 CategoryRepositoryInterface $categoryRepository,
+                                CategoryItemRepositoryInterface $categoryItemRepository,
                                 $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->categoryRepository = $categoryRepository;
+        $this->categoryItemRepository = $categoryItemRepository;
     }
+
+
+
 
 
     /**
@@ -87,8 +96,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $categories = $this->categoryRepository->findAll();
-
-
+        $categoryItems = $this->categoryItemRepository->findAll();
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -103,10 +111,9 @@ class SiteController extends Controller
             return $this->render('login', [
                 'model' => $model,
                 'categories' => $categories,
+                'categoryItems' => $categoryItems,
             ]);
         }
-
-
     }
 
     /**

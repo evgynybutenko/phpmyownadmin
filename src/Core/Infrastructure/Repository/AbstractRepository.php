@@ -48,4 +48,5 @@ abstract class AbstractRepository
             ->execute();
         return $result;
     }
+
 }
