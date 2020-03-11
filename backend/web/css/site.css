@@ -184,36 +184,71 @@ h1 {
 .accordion {
     position: relative;
     width: 30%;
-    margin-top: 0;
-    margin-left: -30%;
+    margin-top: 100px;
+    margin-left: 30%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
 }
+
 .accordion .trigger #checkbox-1,
 .accordion .trigger #checkbox-2,
 .accordion .trigger #checkbox-3,
 .accordion .trigger #checkbox-4,
-.accordion .trigger #checkbox-5{
+.accordion .trigger #checkbox-5,
+.accordion .trigger #checkbox-6,
+.accordion .trigger #checkbox-7,
+.accordion .trigger #checkbox-8,
+.accordion .trigger #checkbox-9,
+.accordion .trigger #checkbox-10,
+.accordion .trigger #checkbox-11,
+.accordion .trigger #checkbox-12,
+.accordion .trigger #checkbox-13{
     display: none;
 }
+
 .accordion .trigger #checkbox-1:checked + label,
 .accordion .trigger #checkbox-2:checked + label,
 .accordion .trigger #checkbox-3:checked + label,
 .accordion .trigger #checkbox-4:checked + label,
-.accordion .trigger #checkbox-5:checked + label{
+.accordion .trigger #checkbox-5:checked + label,
+.accordion .trigger #checkbox-6:checked + label,
+.accordion .trigger #checkbox-7:checked + label,
+.accordion .trigger #checkbox-8:checked + label,
+.accordion .trigger #checkbox-9:checked + label,
+.accordion .trigger #checkbox-10:checked + label,
+.accordion .trigger #checkbox-11:checked + label,
+.accordion .trigger #checkbox-12:checked + label,
+.accordion .trigger #checkbox-13:checked + label{
     background-color: slategray;
 }
 .accordion .trigger #checkbox-1:checked + label i:before,
 .accordion .trigger #checkbox-2:checked + label i:before,
 .accordion .trigger #checkbox-3:checked + label i:before,
 .accordion .trigger #checkbox-4:checked + label i:before,
-.accordion .trigger #checkbox-5:checked + label i:before {
+.accordion .trigger #checkbox-5:checked + label i:before,
+.accordion .trigger #checkbox-6:checked + label i:before,
+.accordion .trigger #checkbox-7:checked + label i:before,
+.accordion .trigger #checkbox-8:checked + label i:before,
+.accordion .trigger #checkbox-9:checked + label i:before,
+.accordion .trigger #checkbox-10:checked + label i:before,
+.accordion .trigger #checkbox-11:checked + label i:before,
+.accordion .trigger #checkbox-12:checked + label i:before,
+.accordion .trigger #checkbox-13:checked + label i:before {
     transform: translate(5px, 8px) rotate(45deg);
 }
 .accordion .trigger #checkbox-1:checked + label i:after,
 .accordion .trigger #checkbox-2:checked + label i:after,
 .accordion .trigger #checkbox-3:checked + label i:after,
 .accordion .trigger #checkbox-4:checked + label i:after,
-.accordion .trigger #checkbox-5:checked + label i:after {
+.accordion .trigger #checkbox-5:checked + label i:after,
+.accordion .trigger #checkbox-6:checked + label i:after,
+.accordion .trigger #checkbox-7:checked + label i:after,
+.accordion .trigger #checkbox-8:checked + label i:after,
+.accordion .trigger #checkbox-9:checked + label i:after,
+.accordion .trigger #checkbox-10:checked + label i:after,
+.accordion .trigger #checkbox-11:checked + label i:after,
+.accordion .trigger #checkbox-12:checked + label i:after,
+.accordion .trigger #checkbox-13:checked + label i:after {
     transform: translate(-5px, 8px) rotate(-45deg);
 }
 .accordion .trigger .checkbox {
@@ -268,7 +303,15 @@ h1 {
 #checkbox-2:checked ~ .content,
 #checkbox-3:checked ~ .content,
 #checkbox-4:checked ~ .content,
-#checkbox-5:checked ~ .content{
+#checkbox-5:checked ~ .content,
+#checkbox-6:checked ~ .content,
+#checkbox-7:checked ~ .content,
+#checkbox-8:checked ~ .content,
+#checkbox-9:checked ~ .content,
+#checkbox-10:checked ~ .content,
+#checkbox-11:checked ~ .content,
+#checkbox-12:checked ~ .content,
+#checkbox-13:checked ~ .content{
     max-height: 350px;
     transition: max-height 500ms ease-in-out;
 }
@@ -276,4 +319,10 @@ h1 {
 #ul_a {
     color: #122b40;
     font-size: large;
+}
+
+
+.form-category {
+    margin-top: -300px;
+    margin-left: 20px;
 }

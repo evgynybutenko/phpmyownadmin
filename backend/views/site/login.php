@@ -5,19 +5,25 @@
 /* @var $model \common\models\LoginForm */
 /* @var $categories array */
 /* @var $categoryItems array */
+/* @var $string array */
 
+use src\Modules\Category\Domain\Entity\Category;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+$category_1 = new Category();   //Добавил для реализации формы
+
 ?>
 
 
 
 <div class="accordion">
 <?php
-$mass = [];
+
 foreach ($categories as $category) {
 
     echo "
@@ -43,3 +49,23 @@ foreach ($categories as $category) {
 }
 ?>
 </div>
+
+<div class="form-category">
+    <div>
+        <?=Html::beginForm(['site/add-category'], 'post', ['class' => ''])?>
+        <?= Html::tag('p', Html::encode('This form to added new category'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'category_name') ?>
+        <?=Html::submitButton('Add category!')?>
+        <?=Html::endForm()?>
+    </div><br>
+    <div>
+        <?=Html::beginForm(['site/add-category-item'], 'post', ['class' => ''])?>
+        <?= Html::tag('p', Html::encode('This form to added new item'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'item_name') ?>
+        <?=Html::submitButton('Add item!')?>
+        <?=Html::endForm()?>
+    </div>
+
+</div>
+
+

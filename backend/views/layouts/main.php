@@ -13,8 +13,6 @@ use common\widgets\Alert;
 
 
 
-
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -27,15 +25,18 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+        body {
+            border: 7px solid deeppink;
+        }
+    </style>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
 
-
-
-
+    <?= Yii::$app->view->params['test'] ?>
     <div class="container">
         <?= $content ?>
     </div>

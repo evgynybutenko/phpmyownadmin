@@ -11,4 +11,5 @@ namespace src\Core\Domain\Entities;
 interface EntityInterface
 {
     public static function getTableName();
+
 }

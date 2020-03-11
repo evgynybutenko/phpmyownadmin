@@ -6,6 +6,7 @@ use src\Core\Domain\Entities\EntityInterface;
 
 class Category implements EntityInterface
 {
+
     public $id;
     public $category_name;
 

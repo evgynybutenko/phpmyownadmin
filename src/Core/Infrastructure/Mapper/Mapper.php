@@ -31,7 +31,10 @@ class Mapper
             $target = Yii::createObject($target);
         }
 
-        foreach ($source as $property => $value) {
+        foreach ($source as $property => $value) { //отбрасывание лишней требухи из массива
+            if (!in_array($property, array_keys(get_object_vars($target)))) {
+                continue;
+            }
             $target->{$property} = $value;
         }
         return $target;

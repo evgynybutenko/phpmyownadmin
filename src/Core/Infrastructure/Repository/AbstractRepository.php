@@ -4,6 +4,7 @@ namespace src\Core\Infrastructure\Repository;
 
 use src\Core\Domain\Entities\EntityInterface;
 use src\Core\Infrastructure\Mapper\Mapper;
+use Yii;
 
 abstract class AbstractRepository
 {
@@ -23,7 +24,7 @@ abstract class AbstractRepository
     public function update(EntityInterface $entity)
     {
         $columns = $this->mapper->toArray($entity);
-        unset($columns['id']);
+
 
         $result =  (bool)\Yii::$app->db
                 ->createCommand()
@@ -38,15 +39,17 @@ abstract class AbstractRepository
 
     public function insert(EntityInterface $entity)
     {
-        $columns = $this->mapper->toArray($entity);
+        $col_category = Yii::$app->view->params['col'];
 
-        $result =  (bool)\Yii::$app->db
+        $columns = $this->mapper->toArray($entity);
+        $columns['id'] = $col_category+1;
+
+        return (bool)\Yii::$app->db
             ->createCommand()
             ->insert(
                 $entity->getTableName(),
                 $columns)
             ->execute();
-        return $result;
     }
 
 }
