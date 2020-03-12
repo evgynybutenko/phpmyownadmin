@@ -101,18 +101,24 @@ class SiteController extends Controller
 
 //http://admin.phpmyownadmin.test/index.php?r=site%2Flogin
 
+    public function actionDel()
+    {
+        $newCategory = Yii::$app->request->post();
+        $category_1 = $this->mapper->map($newCategory, new Category());
+        $this->categoryRepository->delete($category_1);
+        Yii::$app->session->setFlash('success', 'Category was deleted!');
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     public function actionAddCategory()
     {
-        $categories = $this->categoryRepository->findAll();       // Передаю в абстракт. репозиторий кол-во категорий
-        $col = count($categories);
-        $this->view->params['col'] = $col;
-
-
         $newCategory = Yii::$app->request->post();
+
         $category_1 = $this->mapper->map($newCategory, new Category());
 
         $this->categoryRepository->save($category_1);
 
+        Yii::$app->session->setFlash('success', 'New category was added!'); // работает (в лейауте должно быть включено виджет)
         return $this->redirect(Yii::$app->request->referrer);
 
     }

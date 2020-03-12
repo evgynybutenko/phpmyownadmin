@@ -53,15 +53,26 @@ foreach ($categories as $category) {
 <div class="form-category">
     <div>
         <?=Html::beginForm(['site/add-category'], 'post', ['class' => ''])?>
-        <?= Html::tag('p', Html::encode('This form to added new category'), ['class' => 'label-new']) ?>
-        <?=Html::input('text', 'category_name') ?>
+        <b><?= Html::tag('p', Html::encode('This form to added new category'), ['class' => 'label-new']) ?></b>
+        <?=Html::input('text', 'category_name', '', ['class' => 'form_input']) ?>
         <?=Html::submitButton('Add category!')?>
         <?=Html::endForm()?>
-    </div><br>
+    </div><br><br>
+    <div>
+        <?=Html::beginForm(['site/del'], 'post', ['class' => ''])?>
+        <b><?= Html::tag('p', Html::encode('This form to deleted category'), ['class' => 'label-new']) ?></b>
+        <?= Html::tag('p', Html::encode('Enter name of category:'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'category_name', '', ['class' => 'form_input']) ?>
+        <?=Html::submitButton('Delete category!')?>
+        <?=Html::endForm()?>
+    </div><br><br>
     <div>
         <?=Html::beginForm(['site/add-category-item'], 'post', ['class' => ''])?>
-        <?= Html::tag('p', Html::encode('This form to added new item'), ['class' => 'label-new']) ?>
-        <?=Html::input('text', 'item_name') ?>
+        <b><?= Html::tag('p', Html::encode('This form to added new item'), ['class' => 'label-new']) ?></b>
+        <?= Html::tag('p', Html::encode('Enter items name:'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'item_name', '', ['class' => 'form_input']) ?>
+        <?= Html::tag('p', Html::encode('Enter categoryID:'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'id_category', '', ['class' => 'form_input']) ?>
         <?=Html::submitButton('Add item!')?>
         <?=Html::endForm()?>
     </div>

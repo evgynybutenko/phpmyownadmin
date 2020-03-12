@@ -5,6 +5,7 @@ namespace src\Core\Infrastructure\Repository;
 use src\Core\Domain\Entities\EntityInterface;
 use src\Core\Infrastructure\Mapper\Mapper;
 use Yii;
+use yii\db\Expression;
 
 abstract class AbstractRepository
 {
@@ -19,6 +20,13 @@ abstract class AbstractRepository
         return $entity->id ?
             $this->update($entity) :
             $this->insert($entity);
+    }
+
+    public function delete(EntityInterface $entity): bool
+    {         //должен передавать массив с айдишником
+        return (bool)\Yii::$app->db->createCommand()
+            ->delete($entity->getTableName(), ['category_name' => $entity->category_name])
+            ->execute();
     }
 
     public function update(EntityInterface $entity)
@@ -39,10 +47,15 @@ abstract class AbstractRepository
 
     public function insert(EntityInterface $entity)
     {
-        $col_category = Yii::$app->view->params['col'];
-
         $columns = $this->mapper->toArray($entity);
-        $columns['id'] = $col_category+1;
+//        unset($columns['id']);
+
+        foreach ($columns as $key => $value) {
+            if(is_null($value))
+            {
+                $columns[$key] = new Expression("DEFAULT");
+            }
+        }
 
         return (bool)\Yii::$app->db
             ->createCommand()
@@ -51,5 +64,7 @@ abstract class AbstractRepository
                 $columns)
             ->execute();
     }
+
+
 
 }

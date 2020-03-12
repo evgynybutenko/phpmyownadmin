@@ -38,6 +38,8 @@ AppAsset::register($this);
 
     <?= Yii::$app->view->params['test'] ?>
     <div class="container">
+
+        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
