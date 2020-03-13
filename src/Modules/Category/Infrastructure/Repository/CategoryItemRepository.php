@@ -27,4 +27,6 @@ class CategoryItemRepository extends AbstractRepository implements CategoryItemR
         $source = (new Query())->from(CategoryItem::getTableName())->all();
         return $this->mapper->mapItems($source, new CategoryItem());
     }
+
+
 }

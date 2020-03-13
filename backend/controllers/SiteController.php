@@ -3,6 +3,7 @@ namespace backend\controllers;
 
 use src\Core\Infrastructure\Mapper\Mapper;
 use src\Modules\Category\Domain\Entity\Category;
+use src\Modules\Category\Domain\Entity\CategoryItem;
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use Yii;
@@ -101,34 +102,97 @@ class SiteController extends Controller
 
 //http://admin.phpmyownadmin.test/index.php?r=site%2Flogin
 
+    public function actionDelItem()
+    {
+        $delItem = Yii::$app->request->post();
+
+        if ($delItem['item_name'] == '')
+        {
+            Yii::$app->session->setFlash('success', 'Пытаешься удалить? Тут пусто!');
+        }else
+        {
+            $delItemMap = $this->mapper->map($delItem, new CategoryItem());
+            $this->categoryItemRepository->deleteItem($delItemMap);
+            Yii::$app->session->setFlash('success', 'Item was deleted!');
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+
     public function actionDel()
     {
         $newCategory = Yii::$app->request->post();
-        $category_1 = $this->mapper->map($newCategory, new Category());
-        $this->categoryRepository->delete($category_1);
-        Yii::$app->session->setFlash('success', 'Category was deleted!');
+
+        if ($newCategory['category_name'] == '')
+        {
+            Yii::$app->session->setFlash('success', 'Пытаешься удалить? Тут пусто!');
+        }else
+        {
+            $category_1 = $this->mapper->map($newCategory, new Category());
+            $this->categoryRepository->delete($category_1);
+            Yii::$app->session->setFlash('success', 'Category was deleted!');
+        }
+
         return $this->redirect(Yii::$app->request->referrer);
     }
+
+    public function actionAddCategoryItem()
+    {
+        $newItem = Yii::$app->request->post();
+
+        if ($newItem['item_name'] == '' || $newItem['category_name'] == '')
+        {
+            Yii::$app->session->setFlash('success', 'Поле не заполнено!');
+        }else
+        {
+            $categories = $this->categoryRepository->findOneByCategoryName($newItem['category_name']);
+            $id_category = $categories->id; //Тут хранится id соответствующей категории
+
+            $categoryItem_1 = $this->mapper->map($newItem, new CategoryItem());
+            $categoryItem_1->id_category = $id_category;
+
+            $this->categoryItemRepository->save($categoryItem_1);
+            Yii::$app->session->setFlash('error', 'Готово, item добавлен!');
+        }
+
+
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
 
     public function actionAddCategory()
     {
         $newCategory = Yii::$app->request->post();
 
-        $category_1 = $this->mapper->map($newCategory, new Category());
+        if ($newCategory['category_name'] == '')
+        {
+            Yii::$app->session->setFlash('success', 'Поле не заполнено!');
+        }else
+        {
+            $category_1 = $this->mapper->map($newCategory, new Category());
 
-        $this->categoryRepository->save($category_1);
+            $this->categoryItemRepository->save($category_1);
+            Yii::$app->session->setFlash('success', 'New category was added!'); // работает (в лейауте должно быть включено виджет)
+        }
 
-        Yii::$app->session->setFlash('success', 'New category was added!'); // работает (в лейауте должно быть включено виджет)
         return $this->redirect(Yii::$app->request->referrer);
 
     }
 
     public function actionLogin()
     {
-        $this->view->params['test'] = 'Пример пробрасывания из контроллера в лейаут';
+        $a = "Пример пробрасывания";
+
+
+        $this->view->params['test'] = $a;
+
 
         $categories = $this->categoryRepository->findAll();
         $categoryItems = $this->categoryItemRepository->findAll();
+
+        $this->view->params['categories'] = $categories;
+        $this->view->params['categoryItems'] = $categoryItems;
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -148,15 +212,4 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 }

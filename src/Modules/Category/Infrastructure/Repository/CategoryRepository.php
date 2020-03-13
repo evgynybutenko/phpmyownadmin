@@ -23,6 +23,20 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         return $this->mapper->map($source, new Category());
     }
 
+    public function findOneByCategoryName($name_category): ?Category
+    {
+        $source = (new Query())
+            ->from(Category::getTableName())
+            ->where(['category_name' => $name_category])
+            ->one();
+        if(!$source)
+        {
+            return null;
+        }
+
+        return $this->mapper->map($source, new Category());
+    }
+
     public function findAll(): array
     {
         $source = (new Query())

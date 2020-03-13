@@ -20,36 +20,6 @@ $category_1 = new Category();   //Добавил для реализации ф�
 ?>
 
 
-
-<div class="accordion">
-<?php
-
-foreach ($categories as $category) {
-
-    echo "
-    <div class=\"trigger\">
-        <input type=\"checkbox\" id=\"checkbox-{$category->id}\" name=\"checkbox-{$category->id}\" />
-        <label for=\"checkbox-{$category->id}\" class=\"checkbox\">
-            {$category->category_name} <i></i>
-        </label>
-        <div class=\"content\">
-            <ul>";
-                for($i = 0; $i < count($categoryItems); $i++)
-                {
-                    if($categoryItems[$i]->id_category === $category->id)
-                    {
-                        echo "
-                            <a id=\"ul_a\"><li>{$categoryItems[$i]->item_name}</li></a>
-                        ";
-                    }
-                }
-    echo "  </ul>
-        </div>
-    </div>";
-}
-?>
-</div>
-
 <div class="form-category">
     <div>
         <?=Html::beginForm(['site/add-category'], 'post', ['class' => ''])?>
@@ -71,12 +41,19 @@ foreach ($categories as $category) {
         <b><?= Html::tag('p', Html::encode('This form to added new item'), ['class' => 'label-new']) ?></b>
         <?= Html::tag('p', Html::encode('Enter items name:'), ['class' => 'label-new']) ?>
         <?=Html::input('text', 'item_name', '', ['class' => 'form_input']) ?>
-        <?= Html::tag('p', Html::encode('Enter categoryID:'), ['class' => 'label-new']) ?>
-        <?=Html::input('text', 'id_category', '', ['class' => 'form_input']) ?>
+        <?= Html::tag('p', Html::encode('Enter categories name:'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'category_name', '', ['class' => 'form_input']) ?>
         <?=Html::submitButton('Add item!')?>
         <?=Html::endForm()?>
+    </div><br><br>
+    <div>
+        <?=Html::beginForm(['site/del-item'], 'post', ['class' => ''])?>
+        <b><?= Html::tag('p', Html::encode('This form to deleted item'), ['class' => 'label-new']) ?></b>
+        <?= Html::tag('p', Html::encode('Enter name of item:'), ['class' => 'label-new']) ?>
+        <?=Html::input('text', 'item_name', '', ['class' => 'form_input']) ?>
+        <?=Html::submitButton('Delete item!')?>
+        <?=Html::endForm()?>
     </div>
-
 </div>
 
 

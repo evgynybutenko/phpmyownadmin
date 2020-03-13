@@ -11,6 +11,8 @@ interface CategoryRepositoryInterface
 
     public function findAll(): array;
 
+    public function findOneByCategoryName($name_category): ?Category;
+
     //insert
 
     public function save(EntityInterface $entity): bool;

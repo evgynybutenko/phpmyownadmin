@@ -29,6 +29,13 @@ abstract class AbstractRepository
             ->execute();
     }
 
+    public function deleteItem(EntityInterface $entity): bool
+    {         //должен передавать массив с айдишником
+        return (bool)\Yii::$app->db->createCommand()
+            ->delete($entity->getTableName(), ['item_name' => $entity->item_name])
+            ->execute();
+    }
+
     public function update(EntityInterface $entity)
     {
         $columns = $this->mapper->toArray($entity);
@@ -48,7 +55,7 @@ abstract class AbstractRepository
     public function insert(EntityInterface $entity)
     {
         $columns = $this->mapper->toArray($entity);
-//        unset($columns['id']);
+
 
         foreach ($columns as $key => $value) {
             if(is_null($value))
