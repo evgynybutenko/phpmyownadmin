@@ -14,7 +14,6 @@ use common\widgets\Alert;
 $categories = Yii::$app->view->params['categories'];
 $categoryItems = Yii::$app->view->params['categoryItems'];
 
-//<?=$as = Yii::$app->view->params['test']; ПРИМЕР ПРОБРАСЫВАНИЯ
 
 AppAsset::register($this);
 ?>
@@ -61,7 +60,9 @@ AppAsset::register($this);
     </div>";
         }
         ?>
+        <a href="/table/list">перейти на list</a>
     </div>
+
 
     <div class="container">
         <div id="alert_setFlash">

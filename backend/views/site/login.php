@@ -48,12 +48,14 @@ $category_1 = new Category();   //Добавил для реализации ф�
     </div><br><br>
     <div>
         <?=Html::beginForm(['site/del-item'], 'post', ['class' => ''])?>
-        <b><?= Html::tag('p', Html::encode('This form to deleted item'), ['class' => 'label-new']) ?></b>
+        <b><?= Html::tag('p', Html::encode('Delete item'), ['class' => 'label-new']) ?></b>
         <?= Html::tag('p', Html::encode('Enter name of item:'), ['class' => 'label-new']) ?>
         <?=Html::input('text', 'item_name', '', ['class' => 'form_input']) ?>
         <?=Html::submitButton('Delete item!')?>
         <?=Html::endForm()?>
     </div>
 </div>
+
+
 
 

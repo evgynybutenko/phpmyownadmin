@@ -13,8 +13,6 @@ interface CategoryRepositoryInterface
 
     public function findOneByCategoryName($name_category): ?Category;
 
-    //insert
-
     public function save(EntityInterface $entity): bool;
 
     public function delete(EntityInterface $entity): bool;

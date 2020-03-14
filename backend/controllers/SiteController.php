@@ -29,12 +29,14 @@ class SiteController extends Controller
     private $categoryItemRepository;
     private $mapper;
 
-    public function __construct($id, $module,
-                                CategoryRepositoryInterface $categoryRepository,
-                                CategoryItemRepositoryInterface $categoryItemRepository,
-                                Mapper $mapper,
-                                $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        CategoryRepositoryInterface $categoryRepository,
+        CategoryItemRepositoryInterface $categoryItemRepository,
+        Mapper $mapper,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
         $this->categoryRepository = $categoryRepository;
         $this->categoryItemRepository = $categoryItemRepository;
@@ -89,10 +91,10 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+//    public function actionIndex()
+//    {
+//        return $this->redirect('site/login');
+//    }
 
     /**
      * Login action.
@@ -155,8 +157,6 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('error', 'Готово, item добавлен!');
         }
 
-
-
         return $this->redirect(Yii::$app->request->referrer);
     }
 
@@ -185,7 +185,6 @@ class SiteController extends Controller
         $a = "Пример пробрасывания";
 
 
-        $this->view->params['test'] = $a;
 
 
         $categories = $this->categoryRepository->findAll();
