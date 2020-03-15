@@ -11,7 +11,7 @@ use yii\bootstrap\Html;
     <tr>
         <th>ID</th>
         <th>Name of table</th>
-        <th>Title</th>
+        <th>Description/Title</th>
     </tr>
 
     <?php

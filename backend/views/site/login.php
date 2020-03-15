@@ -9,8 +9,7 @@
 
 use src\Modules\Category\Domain\Entity\Category;
 use yii\helpers\Html;
-use yii\widgets\Pjax;
-use yii\bootstrap\ActiveForm;
+
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,7 +19,8 @@ $category_1 = new Category();   //Добавил для реализации ф�
 ?>
 
 
-<div class="form-category">
+<div class="form">
+    <h2 class="h22">Addition and remove category/item</h2>
     <div>
         <?=Html::beginForm(['site/add-category'], 'post', ['class' => ''])?>
         <b><?= Html::tag('p', Html::encode('This form to added new category'), ['class' => 'label-new']) ?></b>

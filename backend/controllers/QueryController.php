@@ -7,43 +7,46 @@ namespace backend\controllers;
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
-use src\Modules\Db\Domain\Repository\SysTableRepositoryInterface;
+use src\Modules\SysQuery\Domain\Repository\SysQueryRepositoryInterface;
 use yii\web\Controller;
 
-class TableController extends Controller
+class QueryController extends Controller
 {
     private $categoryRepository;
     private $categoryItemRepository;
-    private $sysTableRepository;
+    private $sysQueryRepository;
     private $itemUrlRepository;
 
-    public function __construct($id, $module,
-                                CategoryRepositoryInterface $categoryRepository,
-                                CategoryItemRepositoryInterface $categoryItemRepository,
-                                SysTableRepositoryInterface $sysTableRepository,
-                                ItemUrlRepositoryInterface $itemUrlRepository,
-                                $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        CategoryRepositoryInterface $categoryRepository,
+        CategoryItemRepositoryInterface $categoryItemRepository,
+        SysQueryRepositoryInterface $sysQueryRepository,
+        ItemUrlRepositoryInterface $itemUrlRepository,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
         $this->categoryRepository = $categoryRepository;
         $this->categoryItemRepository = $categoryItemRepository;
-        $this->sysTableRepository = $sysTableRepository;
+        $this->sysQueryRepository = $sysQueryRepository;
         $this->itemUrlRepository = $itemUrlRepository;
     }
 
-    public function actionList()
+    public function actionApplyQuery()
     {
         $categories = $this->categoryRepository->findAll();
         $categoryItems = $this->categoryItemRepository->findAll();
-        $sysTable = $this->sysTableRepository->findAll();
+        $sysQueries = $this->sysQueryRepository->findAll();
         $itemUrl = $this->itemUrlRepository->findAll();
 
         $this->view->params['categories'] = $categories;
         $this->view->params['categoryItems'] = $categoryItems;
         $this->view->params['itemUrl'] = $itemUrl;
 
-        return $this->render('table_list', [
-            'sysTable' => $sysTable,
+        return $this->render('query_apply', [
+            'sysQueries' => $sysQueries,
         ]);
     }
+
 }

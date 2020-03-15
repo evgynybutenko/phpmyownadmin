@@ -4,18 +4,17 @@ namespace backend\controllers;
 use src\Core\Infrastructure\Mapper\Mapper;
 use src\Modules\Category\Domain\Entity\Category;
 use src\Modules\Category\Domain\Entity\CategoryItem;
+use src\Modules\Category\Domain\Entity\ItemUrl;
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
+use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
 
 /**
  * Site controller
  */
-
 
 class SiteController extends Controller
 {
@@ -23,17 +22,24 @@ class SiteController extends Controller
      * @var CategoryRepositoryInterface
      */
     /**
-     * @var CategoryItemRepositoryInterface
+     *
+     * @param $id
+     * @param $module
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param CategoryItemRepositoryInterface $categoryItemRepository
+     * @param array $config
      */
     private $categoryRepository;
     private $categoryItemRepository;
     private $mapper;
+    private $itemUrlRepository;
 
     public function __construct(
         $id,
         $module,
         CategoryRepositoryInterface $categoryRepository,
         CategoryItemRepositoryInterface $categoryItemRepository,
+        ItemUrlRepositoryInterface $itemUrlRepository,
         Mapper $mapper,
         $config = []
     ) {
@@ -41,66 +47,13 @@ class SiteController extends Controller
         $this->categoryRepository = $categoryRepository;
         $this->categoryItemRepository = $categoryItemRepository;
         $this->mapper = $mapper;
+        $this->itemUrlRepository = $itemUrlRepository;
     }
 
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['login', 'error'],
-//                        'allow' => true,
-//                    ],
-//                    [
-//                        'actions' => ['logout', 'index'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                ],
-//            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
 //    public function actionIndex()
 //    {
 //        return $this->redirect('site/login');
 //    }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
 
 //http://admin.phpmyownadmin.test/index.php?r=site%2Flogin
 
@@ -186,12 +139,14 @@ class SiteController extends Controller
 
 
 
+        $itemUrl = $this->itemUrlRepository->findAll();
 
         $categories = $this->categoryRepository->findAll();
         $categoryItems = $this->categoryItemRepository->findAll();
 
         $this->view->params['categories'] = $categories;
         $this->view->params['categoryItems'] = $categoryItems;
+        $this->view->params['itemUrl'] = $itemUrl;
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();

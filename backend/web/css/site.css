@@ -344,7 +344,7 @@ h1 {
 }
 
 
-.form-category {
+.form {
     display: inline-block;
     font-size: 16px;
 }
@@ -357,7 +357,7 @@ h1 {
     border-radius: 4px;
 }
 
-.form-category button {
+.form button {
     height: 50px;
     border: 2px solid #434d57;
     border-radius: 7px;

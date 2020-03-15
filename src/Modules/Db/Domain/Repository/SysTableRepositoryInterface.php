@@ -12,10 +12,4 @@ interface SysTableRepositoryInterface
     public function findAll(): array;
 
     public function save(EntityInterface $entity): bool;
-
-    //Дописать delete
-
-    //Дописать по необходимости fibyName
-
-
 }

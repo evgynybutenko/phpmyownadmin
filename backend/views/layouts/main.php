@@ -13,7 +13,7 @@ use common\widgets\Alert;
 
 $categories = Yii::$app->view->params['categories'];
 $categoryItems = Yii::$app->view->params['categoryItems'];
-
+$itemUrl = Yii::$app->view->params['itemUrl'];
 
 AppAsset::register($this);
 ?>
@@ -46,13 +46,28 @@ AppAsset::register($this);
         </label>
         <div class=\"content\">
             <ul>";
-            for($i = 0; $i < count($categoryItems); $i++)
-            {
-                if($categoryItems[$i]->id_category === $category->id)
+            foreach ($categoryItems as $categoryItem) {
+                if($categoryItem->id_category == $category->id) // Поиск соответствия по id категории и item
                 {
-                    echo "
-                            <a id=\"ul_a\"><li>{$categoryItems[$i]->item_name}</li></a>
+                    $j = 0;
+                    foreach ($itemUrl as $item)
+                    {
+                        $j++;
+                        if($item->item_name == $categoryItem->item_name)
+                        {
+                            echo "
+                            <a href='{$item->url}' id=\"ul_a\"><li>{$categoryItem->item_name}</li></a>
                         ";
+                            break;
+                        }
+                        if($j == count($itemUrl))  // Если не находит соответствия по url то выполняется данный иф
+                        {
+                            echo "
+                            <a id=\"ul_a\"><li>{$categoryItem->item_name}</li></a>
+                        ";
+                            break;
+                        }
+                    }
                 }
             }
             echo "  </ul>
@@ -60,7 +75,6 @@ AppAsset::register($this);
     </div>";
         }
         ?>
-        <a href="/table/list">перейти на list</a>
     </div>
 
 

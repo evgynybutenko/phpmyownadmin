@@ -3,17 +3,18 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%url}}`.
+ * Handles the creation of table `query`.
  */
-class m200314_104137_create_url_table extends Migration
+class m200314_133120_create_query_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%url}}', [
+        $this->createTable('query', [
             'id' => $this->primaryKey(),
+            'sql_script' => $this->string(255),
         ]);
     }
 
@@ -22,6 +23,6 @@ class m200314_104137_create_url_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%url}}');
+        $this->dropTable('query');
     }
 }
