@@ -12,7 +12,7 @@ class SysQueryRepository extends AbstractRepository implements SysQueryRepositor
     public function findOneById($id): ?SysQuery
     {
         $source = (new Query())
-            ->from(SysQuery::getTableName())
+            ->from(SysQuery::TABLE_NAME)
             ->where(['id' => $id])
             ->one();
         if(!$source){
@@ -25,7 +25,7 @@ class SysQueryRepository extends AbstractRepository implements SysQueryRepositor
     public function findAll(): array
     {
         $source = (new Query())
-            ->from(SysQuery::getTableName())
+            ->from(SysQuery::TABLE_NAME)
             ->all();
 
         return $this->mapper->mapItems($source, new SysQuery());

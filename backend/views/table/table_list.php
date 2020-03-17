@@ -19,8 +19,8 @@ use yii\bootstrap\Html;
         echo "
                 <tr>
                     <td>{$item->id}</td>
-                    <td><a href='/table/current-table'>{$item->table_name}</a></td>
-                    <td>{$item->title}</td>
+                    <td>{$item->table_name}</td>
+                    <td>{$item->title}<a href='/table/current-table?name={$item->table_name}'><button class='list_button'>-></button></a></td>
                 </tr>
             ";
     }

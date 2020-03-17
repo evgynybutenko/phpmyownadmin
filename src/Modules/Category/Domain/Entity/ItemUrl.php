@@ -9,13 +9,15 @@ use src\Core\Domain\Entities\EntityInterface;
 
 class ItemUrl extends AbstractAttributesEntity implements EntityInterface
 {
+    public CONST TABLE_NAME = "item_url";
+
     public $id;
     public $url;
     public $item_name;
 
-    public static function getTableName()
+    public function getTableName()
     {
-        return "item_url";
+        return self::TABLE_NAME;
     }
 
     public function getAttributes(): array

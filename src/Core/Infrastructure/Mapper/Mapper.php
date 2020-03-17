@@ -2,6 +2,7 @@
 
 namespace src\Core\Infrastructure\Mapper;
 
+use src\Modules\DynamicEntity\Domain\Entity\DynamicEntity;
 use Yii;
 use yii\db\Exception;
 
@@ -63,5 +64,29 @@ class Mapper
             return $source->$property;
         }, $properties);
         return array_combine($properties, $values);
+    }
+
+    public function dynamicMapItems(array $sources, $class): array
+    {
+        $result = [];
+        foreach ($sources as $source)
+        {
+            $result[] = $this->dynamicMap($source, $class);
+        }
+
+        return $result;
+    }
+
+    public function dynamicMap($source, $target): DynamicEntity
+    {
+
+        $target = new DynamicEntity($target, $source);
+
+//        foreach ($source as $property => $value)
+//        {
+//            $target->$property = $value;
+//        }
+//        var_dump($target);die;
+        return $target;
     }
 }

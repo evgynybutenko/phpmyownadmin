@@ -7,13 +7,15 @@ use src\Core\Domain\Entities\EntityInterface;
 
 class CategoryItem extends AbstractAttributesEntity implements EntityInterface
 {
+    public CONST TABLE_NAME = "category_item";
+
     public $id;
     public $item_name;
     public $id_category;
 
-    public static function getTableName()
+    public function getTableName()
     {
-        return "category_item";
+        return self::TABLE_NAME;
     }
 
     public function getAttributes(): array

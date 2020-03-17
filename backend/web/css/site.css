@@ -3,8 +3,6 @@ body {
     height: 100%;
 }
 
-
-
 .wrap {
     min-height: 100%;
     height: auto;
@@ -366,3 +364,7 @@ h1 {
     margin-top: 0;
 }
 
+.list_button{
+    float: right;
+    margin-right: 20px;
+}

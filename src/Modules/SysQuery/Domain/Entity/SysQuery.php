@@ -7,12 +7,14 @@ use src\Core\Domain\Entities\EntityInterface;
 
 class SysQuery extends AbstractAttributesEntity implements EntityInterface
 {
+    public CONST TABLE_NAME = "query";
+
     public $id;
     public $sql_script;
 
-    public static function getTableName()
+    public function getTableName()
     {
-        return "query";
+        return self::TABLE_NAME;
     }
 
     public function getAttributes(): array

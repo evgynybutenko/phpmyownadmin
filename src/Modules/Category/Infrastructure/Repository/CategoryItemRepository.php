@@ -12,7 +12,7 @@ class CategoryItemRepository extends AbstractRepository implements CategoryItemR
     public function findOneById($id): ?CategoryItem
     {
         $source = (new Query())
-            ->from(CategoryItem::getTableName())
+            ->from(CategoryItem::TABLE_NAME)
             ->where(['id' => $id])
             ->one();
         if(!$source){
@@ -24,14 +24,14 @@ class CategoryItemRepository extends AbstractRepository implements CategoryItemR
 
     public function findAll(): array
     {
-        $source = (new Query())->from(CategoryItem::getTableName())->all();
+        $source = (new Query())->from(CategoryItem::TABLE_NAME)->all();
         return $this->mapper->mapItems($source, new CategoryItem());
     }
 
     public function findOneByItemName($name_item): ?CategoryItem
     {
         $source = (new Query())
-            ->from(CategoryItem::getTableName())
+            ->from(CategoryItem::TABLE_NAME)
             ->where(['item_name' => $name_item])
             ->one();
         if(!$source)

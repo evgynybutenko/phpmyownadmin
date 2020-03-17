@@ -13,7 +13,7 @@ class SysTableRepository extends AbstractRepository implements SysTableRepositor
     public function findOneById($id): ?SysTable
     {
         $source = (new Query())
-            ->from(SysTable::getTableName())
+            ->from(SysTable::TABLE_NAME)
             ->where(['id' => $id])
             ->one();
         if(!$source){
@@ -26,7 +26,7 @@ class SysTableRepository extends AbstractRepository implements SysTableRepositor
     public function findAll(): array
     {
         $source = (new Query())
-            ->from(SysTable::getTableName())
+            ->from(SysTable::TABLE_NAME)
             ->all();
 
         return $this->mapper->mapItems($source, new SysTable());

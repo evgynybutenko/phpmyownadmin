@@ -8,47 +8,41 @@ use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
 use src\Modules\Db\Domain\Repository\SysTableRepositoryInterface;
-use yii\web\Controller;
+use src\Modules\DynamicEntity\Infrastructure\Repository\DynamicEntityRepository;
 
-class TableController extends Controller
+class TableController extends MyBeforeController
 {
-    private $categoryRepository;
-    private $categoryItemRepository;
     private $sysTableRepository;
-    private $itemUrlRepository;
+    private $dynamicEntityRepository;
 
-    public function __construct($id, $module,
+    public function __construct($id,
+                                $module,
                                 CategoryRepositoryInterface $categoryRepository,
                                 CategoryItemRepositoryInterface $categoryItemRepository,
-                                SysTableRepositoryInterface $sysTableRepository,
                                 ItemUrlRepositoryInterface $itemUrlRepository,
+                                SysTableRepositoryInterface $sysTableRepository,
+                                DynamicEntityRepository $dynamicEntityRepository,
                                 $config = [])
     {
-        parent::__construct($id, $module, $config);
-        $this->categoryRepository = $categoryRepository;
-        $this->categoryItemRepository = $categoryItemRepository;
+        parent::__construct($id, $module, $categoryRepository, $categoryItemRepository, $itemUrlRepository, $config);
         $this->sysTableRepository = $sysTableRepository;
-        $this->itemUrlRepository = $itemUrlRepository;
+        $this->dynamicEntityRepository = $dynamicEntityRepository;
     }
+
 
     public function actionList()
     {
-        $categories = $this->categoryRepository->findAll();
-        $categoryItems = $this->categoryItemRepository->findAll();
+
         $sysTable = $this->sysTableRepository->findAll();
-        $itemUrl = $this->itemUrlRepository->findAll();
-
-        $this->view->params['categories'] = $categories;
-        $this->view->params['categoryItems'] = $categoryItems;
-        $this->view->params['itemUrl'] = $itemUrl;
-
         return $this->render('table_list', [
             'sysTable' => $sysTable,
         ]);
     }
 
-    public function actionCurrentTable()
+    public function actionCurrentTable($name)
     {
-
+        $records = $this->dynamicEntityRepository->findAll($name);
+//        var_dump($records); die;
+        return $this->render('view_current_table', ['columns' => $records, 'name' => $name]);
     }
 }

@@ -14,7 +14,7 @@ class ItemUrlRepository extends AbstractRepository implements ItemUrlRepositoryI
     public function findOneById($id): ?ItemUrl
     {
         $source = (new Query())
-            ->from(ItemUrl::getTableName())
+            ->from(ItemUrl::TABLE_NAME)
             ->where(['id' => $id])
             ->one();
         if(!$source){
@@ -27,7 +27,7 @@ class ItemUrlRepository extends AbstractRepository implements ItemUrlRepositoryI
     public function findAll(): array
     {
         $source = (new Query())
-            ->from(ItemUrl::getTableName())
+            ->from(ItemUrl::TABLE_NAME)
             ->all();
         return $this->mapper->mapItems($source, new ItemUrl());
     }
