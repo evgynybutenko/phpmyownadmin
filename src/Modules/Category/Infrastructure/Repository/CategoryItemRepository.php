@@ -28,5 +28,17 @@ class CategoryItemRepository extends AbstractRepository implements CategoryItemR
         return $this->mapper->mapItems($source, new CategoryItem());
     }
 
+    public function findOneByItemName($name_item): ?CategoryItem
+    {
+        $source = (new Query())
+            ->from(CategoryItem::getTableName())
+            ->where(['item_name' => $name_item])
+            ->one();
+        if(!$source)
+        {
+            return null;
+        }
 
+        return $this->mapper->map($source, new CategoryItem());
+    }
 }

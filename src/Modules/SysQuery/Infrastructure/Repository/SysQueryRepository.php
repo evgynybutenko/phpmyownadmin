@@ -30,4 +30,6 @@ class SysQueryRepository extends AbstractRepository implements SysQueryRepositor
 
         return $this->mapper->mapItems($source, new SysQuery());
     }
+
+
 }

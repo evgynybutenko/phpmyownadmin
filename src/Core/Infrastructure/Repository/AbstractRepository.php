@@ -25,14 +25,7 @@ abstract class AbstractRepository
     public function delete(EntityInterface $entity): bool
     {
         return (bool)\Yii::$app->db->createCommand()
-            ->delete($entity->getTableName(), ['category_name' => $entity->category_name])
-            ->execute();
-    }
-
-    public function deleteItem(EntityInterface $entity): bool
-    {
-        return (bool)\Yii::$app->db->createCommand()
-            ->delete($entity->getTableName(), ['item_name' => $entity->item_name])
+            ->delete($entity->getTableName(), ['id' => $entity->id])
             ->execute();
     }
 

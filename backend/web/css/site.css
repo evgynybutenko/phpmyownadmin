@@ -191,82 +191,78 @@ h1 {
 }
 
 .accordion .trigger #checkbox-1,
-.accordion .trigger #checkbox-2,
-.accordion .trigger #checkbox-3,
-.accordion .trigger #checkbox-4,
-.accordion .trigger #checkbox-31,
-.accordion .trigger #checkbox-32,
-.accordion .trigger #checkbox-33,
-.accordion .trigger #checkbox-34,
-.accordion .trigger #checkbox-35,
-.accordion .trigger #checkbox-36,
 .accordion .trigger #checkbox-37,
-.accordion .trigger #checkbox-38,
 .accordion .trigger #checkbox-39,
-.accordion .trigger #checkbox-40,
-.accordion .trigger #checkbox-41,
-.accordion .trigger #checkbox-42,
-.accordion .trigger #checkbox-43{
+.accordion .trigger #checkbox-43,
+.accordion .trigger #checkbox-44,
+.accordion .trigger #checkbox-45,
+.accordion .trigger #checkbox-46,
+.accordion .trigger #checkbox-47,
+.accordion .trigger #checkbox-48,
+.accordion .trigger #checkbox-49,
+.accordion .trigger #checkbox-50,
+.accordion .trigger #checkbox-51,
+.accordion .trigger #checkbox-52,
+.accordion .trigger #checkbox-53,
+.accordion .trigger #checkbox-54,
+.accordion .trigger #checkbox-55 {
     display: none;
 }
 
 .accordion .trigger #checkbox-1:checked + label,
-.accordion .trigger #checkbox-2:checked + label,
-.accordion .trigger #checkbox-3:checked + label,
-.accordion .trigger #checkbox-4:checked + label,
-.accordion .trigger #checkbox-31:checked + label,
-.accordion .trigger #checkbox-32:checked + label,
-.accordion .trigger #checkbox-33:checked + label,
-.accordion .trigger #checkbox-34:checked + label,
-.accordion .trigger #checkbox-35:checked + label,
-.accordion .trigger #checkbox-36:checked + label,
 .accordion .trigger #checkbox-37:checked + label,
-.accordion .trigger #checkbox-38:checked + label,
 .accordion .trigger #checkbox-39:checked + label,
-.accordion .trigger #checkbox-40:checked + label,
-.accordion .trigger #checkbox-41:checked + label,
-.accordion .trigger #checkbox-42:checked + label,
-.accordion .trigger #checkbox-43:checked + label{
+.accordion .trigger #checkbox-43:checked + label,
+.accordion .trigger #checkbox-44:checked + label,
+.accordion .trigger #checkbox-45:checked + label,
+.accordion .trigger #checkbox-46:checked + label,
+.accordion .trigger #checkbox-47:checked + label,
+.accordion .trigger #checkbox-48:checked + label,
+.accordion .trigger #checkbox-49:checked + label,
+.accordion .trigger #checkbox-50:checked + label,
+.accordion .trigger #checkbox-51:checked + label,
+.accordion .trigger #checkbox-52:checked + label,
+.accordion .trigger #checkbox-53:checked + label,
+.accordion .trigger #checkbox-54:checked + label,
+.accordion .trigger #checkbox-45:checked + label {
     background-color: slategray;
 }
 
 .accordion .trigger #checkbox-1:checked + label i:before,
-.accordion .trigger #checkbox-2:checked + label i:before,
-.accordion .trigger #checkbox-3:checked + label i:before,
-.accordion .trigger #checkbox-4:checked + label i:before,
-.accordion .trigger #checkbox-31:checked + label i:before,
-.accordion .trigger #checkbox-32:checked + label i:before,
-.accordion .trigger #checkbox-33:checked + label i:before,
-.accordion .trigger #checkbox-34:checked + label i:before,
-.accordion .trigger #checkbox-35:checked + label i:before,
-.accordion .trigger #checkbox-36:checked + label i:before,
 .accordion .trigger #checkbox-37:checked + label i:before,
-.accordion .trigger #checkbox-38:checked + label i:before,
 .accordion .trigger #checkbox-39:checked + label i:before,
-.accordion .trigger #checkbox-40:checked + label i:before,
-.accordion .trigger #checkbox-41:checked + label i:before,
-.accordion .trigger #checkbox-42:checked + label i:before,
-.accordion .trigger #checkbox-43:checked + label i:before {
+.accordion .trigger #checkbox-43:checked + label i:before,
+.accordion .trigger #checkbox-44:checked + label i:before,
+.accordion .trigger #checkbox-45:checked + label i:before,
+.accordion .trigger #checkbox-46:checked + label i:before,
+.accordion .trigger #checkbox-47:checked + label i:before,
+.accordion .trigger #checkbox-48:checked + label i:before,
+.accordion .trigger #checkbox-49:checked + label i:before,
+.accordion .trigger #checkbox-50:checked + label i:before,
+.accordion .trigger #checkbox-51:checked + label i:before,
+.accordion .trigger #checkbox-52:checked + label i:before,
+.accordion .trigger #checkbox-53:checked + label i:before,
+.accordion .trigger #checkbox-54:checked + label i:before,
+.accordion .trigger #checkbox-55:checked + label i:before {
     transform: translate(5px, 8px) rotate(45deg);
 }
 
 .accordion .trigger #checkbox-1:checked + label i:after,
-.accordion .trigger #checkbox-2:checked + label i:after,
-.accordion .trigger #checkbox-3:checked + label i:after,
-.accordion .trigger #checkbox-4:checked + label i:after,
-.accordion .trigger #checkbox-31:checked + label i:after,
-.accordion .trigger #checkbox-32:checked + label i:after,
-.accordion .trigger #checkbox-33:checked + label i:after,
-.accordion .trigger #checkbox-34:checked + label i:after,
-.accordion .trigger #checkbox-35:checked + label i:after,
-.accordion .trigger #checkbox-36:checked + label i:after,
 .accordion .trigger #checkbox-37:checked + label i:after,
-.accordion .trigger #checkbox-38:checked + label i:after,
 .accordion .trigger #checkbox-39:checked + label i:after,
-.accordion .trigger #checkbox-40:checked + label i:after,
-.accordion .trigger #checkbox-41:checked + label i:after,
-.accordion .trigger #checkbox-42:checked + label i:after,
-.accordion .trigger #checkbox-43:checked + label i:after {
+.accordion .trigger #checkbox-43:checked + label i:after,
+.accordion .trigger #checkbox-44:checked + label i:after,
+.accordion .trigger #checkbox-45:checked + label i:after,
+.accordion .trigger #checkbox-46:checked + label i:after,
+.accordion .trigger #checkbox-47:checked + label i:after,
+.accordion .trigger #checkbox-48:checked + label i:after,
+.accordion .trigger #checkbox-49:checked + label i:after,
+.accordion .trigger #checkbox-50:checked + label i:after,
+.accordion .trigger #checkbox-51:checked + label i:after,
+.accordion .trigger #checkbox-52:checked + label i:after,
+.accordion .trigger #checkbox-53:checked + label i:after,
+.accordion .trigger #checkbox-54:checked + label i:after,
+.accordion .trigger #checkbox-55:checked + label i:after {
     transform: translate(-5px, 8px) rotate(-45deg);
 }
 .accordion .trigger .checkbox {
@@ -318,22 +314,21 @@ h1 {
 }
 
 #checkbox-1:checked ~ .content,
-#checkbox-2:checked ~ .content,
-#checkbox-3:checked ~ .content,
-#checkbox-4:checked ~ .content,
-#checkbox-31:checked ~ .content,
-#checkbox-32:checked ~ .content,
-#checkbox-33:checked ~ .content,
-#checkbox-34:checked ~ .content,
-#checkbox-35:checked ~ .content,
-#checkbox-36:checked ~ .content,
 #checkbox-37:checked ~ .content,
-#checkbox-38:checked ~ .content,
 #checkbox-39:checked ~ .content,
-#checkbox-40:checked ~ .content,
-#checkbox-41:checked ~ .content,
-#checkbox-42:checked ~ .content,
-#checkbox-43:checked ~ .content{
+#checkbox-43:checked ~ .content,
+#checkbox-44:checked ~ .content,
+#checkbox-45:checked ~ .content,
+#checkbox-46:checked ~ .content,
+#checkbox-47:checked ~ .content,
+#checkbox-48:checked ~ .content,
+#checkbox-49:checked ~ .content,
+#checkbox-50:checked ~ .content,
+#checkbox-51:checked ~ .content,
+#checkbox-52:checked ~ .content,
+#checkbox-53:checked ~ .content,
+#checkbox-54:checked ~ .content,
+#checkbox-55:checked ~ .content {
     max-height: 350px;
     transition: max-height 500ms ease-in-out;
 }
@@ -370,3 +365,4 @@ h1 {
 .h22 {
     margin-top: 0;
 }
+

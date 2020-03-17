@@ -46,4 +46,9 @@ class TableController extends Controller
             'sysTable' => $sysTable,
         ]);
     }
+
+    public function actionCurrentTable()
+    {
+
+    }
 }

@@ -12,7 +12,9 @@ interface CategoryItemRepositoryInterface
 
     public function findAll(): array;
 
+    public function findOneByItemName($name_item): ?CategoryItem;
+
     public function save(EntityInterface $entity): bool;
 
-    public function deleteItem(EntityInterface $entity): bool;
+    public function delete(EntityInterface $entity): bool;
 }

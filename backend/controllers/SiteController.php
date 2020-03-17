@@ -66,8 +66,9 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', 'Пытаешься удалить? Тут пусто!');
         }else
         {
-            $delItemMap = $this->mapper->map($delItem, new CategoryItem());
-            $this->categoryItemRepository->deleteItem($delItemMap);
+            $item = $this->categoryItemRepository->findOneByItemName($delItem['item_name']);
+
+            $this->categoryItemRepository->delete($item);
             Yii::$app->session->setFlash('success', 'Item was deleted!');
         }
         return $this->redirect(Yii::$app->request->referrer);
@@ -83,8 +84,8 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', 'Пытаешься удалить? Тут пусто!');
         }else
         {
-            $category_1 = $this->mapper->map($newCategory, new Category());
-            $this->categoryRepository->delete($category_1);
+            $category = $this->categoryRepository->findOneByCategoryName($newCategory['category_name']);
+            $this->categoryRepository->delete($category);
             Yii::$app->session->setFlash('success', 'Category was deleted!');
         }
 
@@ -97,7 +98,7 @@ class SiteController extends Controller
 
         if ($newItem['item_name'] == '' || $newItem['category_name'] == '')
         {
-            Yii::$app->session->setFlash('success', 'Поле не заполнено!');
+            Yii::$app->session->setFlash('error', 'Поле не заполнено!');
         }else
         {
             $categories = $this->categoryRepository->findOneByCategoryName($newItem['category_name']);
@@ -107,12 +108,11 @@ class SiteController extends Controller
             $categoryItem_1->id_category = $id_category;
 
             $this->categoryItemRepository->save($categoryItem_1);
-            Yii::$app->session->setFlash('error', 'Готово, item добавлен!');
+            Yii::$app->session->setFlash('success', 'Готово, item добавлен!');
         }
 
         return $this->redirect(Yii::$app->request->referrer);
     }
-
 
     public function actionAddCategory()
     {
@@ -130,17 +130,11 @@ class SiteController extends Controller
         }
 
         return $this->redirect(Yii::$app->request->referrer);
-
     }
 
     public function actionLogin()
     {
-        $a = "Пример пробрасывания";
-
-
-
         $itemUrl = $this->itemUrlRepository->findAll();
-
         $categories = $this->categoryRepository->findAll();
         $categoryItems = $this->categoryItemRepository->findAll();
 
@@ -148,22 +142,9 @@ class SiteController extends Controller
         $this->view->params['categoryItems'] = $categoryItems;
         $this->view->params['itemUrl'] = $itemUrl;
 
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-                'categories' => $categories,
-                'categoryItems' => $categoryItems,
-            ]);
-        }
+        return $this->render('login', [
+            'categories' => $categories,
+            'categoryItems' => $categoryItems,
+        ]);
     }
-
 }

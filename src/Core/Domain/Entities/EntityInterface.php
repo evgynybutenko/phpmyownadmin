@@ -10,6 +10,6 @@ namespace src\Core\Domain\Entities;
 
 interface EntityInterface
 {
-    public static function getTableName();
+    public static function getTableName(); //убрал static
 
 }
