@@ -24,6 +24,6 @@ class DynamicEntityRepository extends AbstractRepository implements DynamicEntit
             ->where(['id' => $id])
             ->one();
 
-        return $this->mapper->map($record, new DynamicEntity());
+        return $this->mapper->dynamicMap($record, $tableName);
     }
 }

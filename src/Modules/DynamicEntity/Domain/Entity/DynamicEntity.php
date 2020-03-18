@@ -6,8 +6,8 @@ use src\Core\Domain\Entities\EntityInterface;
 
 class DynamicEntity implements EntityInterface
 {
-    private $tableName;
-    private $attributes;
+    public $tableName;
+    public $attributes;
 
     public function getTableName()
     {

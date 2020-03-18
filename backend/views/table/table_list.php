@@ -20,7 +20,7 @@ use yii\bootstrap\Html;
                 <tr>
                     <td>{$item->id}</td>
                     <td>{$item->table_name}</td>
-                    <td>{$item->title}<a href='/table/current-table?name={$item->table_name}'><button class='list_button'>-></button></a></td>
+                    <td>{$item->title}<a href='/record/current-table?name={$item->table_name}'><button class='list_button'>-></button></a></td>
                 </tr>
             ";
     }

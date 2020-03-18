@@ -1,8 +1,6 @@
 <?php
 
-
 namespace backend\controllers;
-
 
 use src\Core\Infrastructure\Mapper\Mapper;
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
@@ -11,15 +9,12 @@ use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
 use src\Modules\SysQuery\Domain\Entity\SysQuery;
 use src\Modules\SysQuery\Domain\Repository\SysQueryRepositoryInterface;
 use Yii;
-use yii\web\Controller;
 use src\Modules\SysQuery\Infrastructure\Service\ExecuteQueryService;
 
-class QueryController extends Controller
+class QueryController extends MyBeforeController
 {
-    private $categoryRepository;
-    private $categoryItemRepository;
+
     private $sysQueryRepository;
-    private $itemUrlRepository;
     private $executeQuery;
     private $mapper;
 
@@ -28,31 +23,20 @@ class QueryController extends Controller
         $module,
         CategoryRepositoryInterface $categoryRepository,
         CategoryItemRepositoryInterface $categoryItemRepository,
-        SysQueryRepositoryInterface $sysQueryRepository,
         ItemUrlRepositoryInterface $itemUrlRepository,
+        SysQueryRepositoryInterface $sysQueryRepository,
         ExecuteQueryService $executeQuery,
         Mapper $mapper,
         $config = []
     ) {
-        parent::__construct($id, $module, $config);
-        $this->categoryRepository = $categoryRepository;
-        $this->categoryItemRepository = $categoryItemRepository;
+        parent::__construct($id, $module, $categoryRepository, $categoryItemRepository, $itemUrlRepository, $config);
         $this->sysQueryRepository = $sysQueryRepository;
-        $this->itemUrlRepository = $itemUrlRepository;
         $this->executeQuery = $executeQuery;
         $this->mapper = $mapper;
     }
 
     public function actionApplyQuery()
     {
-        $categories = $this->categoryRepository->findAll();
-        $categoryItems = $this->categoryItemRepository->findAll();
-        $itemUrl = $this->itemUrlRepository->findAll();
-
-        $this->view->params['categories'] = $categories;
-        $this->view->params['categoryItems'] = $categoryItems;
-        $this->view->params['itemUrl'] = $itemUrl;
-
         return $this->render('query_apply');
     }
 
@@ -60,14 +44,14 @@ class QueryController extends Controller
     {
         $executeQuery = Yii::$app->request->post();
 
-        if ($executeQuery['sql_script'] == '')   //проверка на пустоту
+        if ($executeQuery['sql_script'] == '')
         {
             Yii::$app->session->setFlash('success', 'Поле не заполнено!');
             return $this->redirect(Yii::$app->request->referrer);
         }
 
         try {
-            $result = $this->executeQuery->executeQuery($executeQuery['sql_script']); //выполнение sql-крипта
+            $result = $this->executeQuery->executeQuery($executeQuery['sql_script']);
 
             if ($result) {
                 Yii::$app->session->setFlash('success', 'Successful sql-request!');
@@ -89,17 +73,8 @@ class QueryController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-
     public function actionQueryTable()
     {
-        $categoryItems = $this->categoryItemRepository->findAll();
-        $itemUrl = $this->itemUrlRepository->findAll();
-        $categories = $this->categoryRepository->findAll();
-
-        $this->view->params['categories'] = $categories;
-        $this->view->params['categoryItems'] = $categoryItems;
-        $this->view->params['itemUrl'] = $itemUrl;
-
         $scripts = $this->sysQueryRepository->findAll();
         return $this->render('query_table', [
             'scripts' => $scripts,

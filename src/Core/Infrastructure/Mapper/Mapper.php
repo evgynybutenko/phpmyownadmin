@@ -79,14 +79,8 @@ class Mapper
 
     public function dynamicMap($source, $target): DynamicEntity
     {
-
         $target = new DynamicEntity($target, $source);
 
-//        foreach ($source as $property => $value)
-//        {
-//            $target->$property = $value;
-//        }
-//        var_dump($target);die;
         return $target;
     }
 }
