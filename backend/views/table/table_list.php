@@ -6,7 +6,7 @@ use yii\bootstrap\Html;
 
 ?>
 <h2 class="h22">All Tables</h2>
-
+<br>
 <table border="2" class="table table-striped">
     <tr>
         <th>ID</th>

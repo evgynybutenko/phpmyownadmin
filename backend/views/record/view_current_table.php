@@ -1,9 +1,8 @@
 <?php
 
-
-
 /* @var $columns array */
 /* @var $name string */
+
 $url = "/record/save?name=".$name;
 $url_del = "/record/delete?name=".$name;
 $attributes = array_keys($columns[0]->getAttributes());

@@ -10,5 +10,4 @@ interface DynamicEntityRepositoryInterface
 
     public function findByRecordId($tableName, $id): ?DynamicEntity;
 
-    public function dynamicSave(DynamicEntity $entity);
 }

@@ -3,6 +3,8 @@ body {
     height: 100%;
 }
 
+
+
 .wrap {
     min-height: 87%;
     height: auto;
@@ -344,14 +346,18 @@ h1 {
 
 .form_input {
     width: 500px;
-    height: 50px;
+    height: 45px;
     border: 2px solid #cecece;
     background: #F6F6f6;
     border-radius: 4px;
 }
 
+body select {
+    height: 45px;
+}
+
 .form button {
-    height: 50px;
+    height: 45px;
     border: 2px solid #434d57;
     border-radius: 7px;
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace backend\controllers;
-
 
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
@@ -13,14 +11,15 @@ class TableController extends MyBeforeController
 {
     private $sysTableRepository;
 
-    public function __construct($id,
-                                $module,
-                                CategoryRepositoryInterface $categoryRepository,
-                                CategoryItemRepositoryInterface $categoryItemRepository,
-                                ItemUrlRepositoryInterface $itemUrlRepository,
-                                SysTableRepositoryInterface $sysTableRepository,
-                                $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        CategoryRepositoryInterface $categoryRepository,
+        CategoryItemRepositoryInterface $categoryItemRepository,
+        ItemUrlRepositoryInterface $itemUrlRepository,
+        SysTableRepositoryInterface $sysTableRepository,
+        $config = []
+    ) {
         parent::__construct($id, $module, $categoryRepository, $categoryItemRepository, $itemUrlRepository, $config);
         $this->sysTableRepository = $sysTableRepository;
     }

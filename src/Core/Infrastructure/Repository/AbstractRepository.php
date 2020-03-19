@@ -62,7 +62,7 @@ abstract class AbstractRepository
             ->execute();
     }
 
-    public function dynamicSave(DynamicEntity $entity)
+    public function dynamicSave(DynamicEntity $entity)    //использовать обычный save/del
     {
         $columns = $entity->attributes;
         unset($columns['_csrf-backend']);
