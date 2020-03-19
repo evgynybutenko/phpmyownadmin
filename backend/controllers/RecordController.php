@@ -8,6 +8,7 @@ use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
 use src\Modules\DynamicEntity\Infrastructure\Repository\DynamicEntityRepository;
 use Yii;
+use yii\helpers\Url;
 
 class RecordController extends MyBeforeController
 {
@@ -94,22 +95,24 @@ class RecordController extends MyBeforeController
     public function actionCreateLast($tableName)
     {
         $dataToCreate = Yii::$app->request->post();
-        var_dump($dataToCreate);die;
-        $example = "CREATE TABLE `db_project1`.`FILMS` ( `id` INT NOT NULL , `Jenre` VARCHAR(255) NOT NULL , `Year` TEXT NOT NULL ) ENGINE = InnoDB;";
-        $stringToCreate = "CREATE TABLE `phpmyownadmin`.`".$tableName."` ( ";
+
+        $stringToCreate = "CREATE TABLE \"public\".\"".$tableName."\" ( ";
         $names = $dataToCreate['names'];
         $type = $dataToCreate['type'];
         for($i = 0; $i < count($dataToCreate['names']); $i++)
         {
-            if($i = 0)
+            if($i == 0)
             {
-                $stringToCreate = $stringToCreate."`".$names[$i]."` ".$type[$i]." NOT NULL ";
+                $stringToCreate = $stringToCreate."\"".$names[$i]."\" ".$type[$i]." NOT NULL ";
             } else
             {
-                $stringToCreate = $stringToCreate.", `".$names[$i]."` ".$type[$i]." NOT NULL ";
+                $stringToCreate = $stringToCreate.", \"".$names[$i]."\" ".$type[$i]." NOT NULL ";
             }
         }
         $stringToCreate = $stringToCreate.")";
-        var_dump($stringToCreate);die;
+
+        $url = "/table/list";
+        Yii::$app->db->createCommand($stringToCreate)->execute();
+        return $this->redirect(Url::to($url));
     }
 }
