@@ -80,7 +80,6 @@ class Mapper
     public function dynamicMap($source, $target): DynamicEntity
     {
         $target = new DynamicEntity($target, $source);
-
         return $target;
     }
 }

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use src\Core\Infrastructure\Mapper\Mapper;
+use src\Core\Domain\Service\CreateSQLQueryStringService;
 use src\Modules\Category\Domain\Repository\CategoryItemRepositoryInterface;
 use src\Modules\Category\Domain\Repository\CategoryRepositoryInterface;
 use src\Modules\Category\Domain\Repository\ItemUrlRepositoryInterface;
@@ -14,6 +15,7 @@ class RecordController extends MyBeforeController
 {
     public $dynamicEntityRepository;
     public $mapper;
+    public $stringSQL;
 
     public function __construct(
         $id,
@@ -22,12 +24,14 @@ class RecordController extends MyBeforeController
         CategoryItemRepositoryInterface $categoryItemRepository,
         ItemUrlRepositoryInterface $itemUrlRepository,
         DynamicEntityRepository $dynamicEntityRepository,
+        CreateSQLQueryStringService $stringSQL,
         Mapper $mapper,
         $config = []
     ) {
         parent::__construct($id, $module, $categoryRepository, $categoryItemRepository, $itemUrlRepository, $config);
         $this->dynamicEntityRepository = $dynamicEntityRepository;
         $this->mapper = $mapper;
+        $this->stringSQL = $stringSQL;
     }
 
     public function actionDelete($name)
@@ -81,14 +85,15 @@ class RecordController extends MyBeforeController
     public function actionCreateNext()
     {
         $toCreate = Yii::$app->request->post();
-        if($toCreate['col'] == '' || $toCreate['tableName'] == '')
+        if($toCreate['col'] == '' || $toCreate['tableName'] == '' || $toCreate['description'] == '')
         {
             Yii::$app->session->setFlash('error', 'Поле не заполнено!');
             return $this->redirect(Yii::$app->request->referrer);
         }
         return $this->render('create_table_next', [
             'col' => $toCreate['col'],
-            'tableName' => $toCreate['tableName']]
+            'tableName' => $toCreate['tableName'],
+            'description' => $toCreate['description']]
         );
     }
 
@@ -96,23 +101,39 @@ class RecordController extends MyBeforeController
     {
         $dataToCreate = Yii::$app->request->post();
 
-        $stringToCreate = "CREATE TABLE \"public\".\"".$tableName."\" ( ";
-        $names = $dataToCreate['names'];
-        $type = $dataToCreate['type'];
-        for($i = 0; $i < count($dataToCreate['names']); $i++)
+        $urlList = "/table/list";
+        $urlCreate = "/record/create";
+        $description = $dataToCreate['description'];
+        $indexes = $dataToCreate['index'];
+        $i = 0;
+        $sysTable = 'sys_table';
+
+        $toSave = [
+            'id' => null,
+            'table_name' => $tableName,
+            'title' => $description,
+        ];
+
+        foreach ($indexes as $index)
         {
-            if($i == 0)
+            if ($index == 'PRIMARY')
             {
-                $stringToCreate = $stringToCreate."\"".$names[$i]."\" ".$type[$i]." NOT NULL ";
-            } else
-            {
-                $stringToCreate = $stringToCreate.", \"".$names[$i]."\" ".$type[$i]." NOT NULL ";
+                $i++;
             }
         }
-        $stringToCreate = $stringToCreate.")";
+        if($i > 1)
+        {
+            Yii::$app->session->setFlash('error', 'Может быть только один первичный ключ!');
+            return $this->redirect(Url::to($urlCreate));
+        }
 
-        $url = "/table/list";
+        $stringToCreate = $this->stringSQL->parseQuery($tableName, $dataToCreate);
         Yii::$app->db->createCommand($stringToCreate)->execute();
-        return $this->redirect(Url::to($url));
+
+        $toSaveNext = $this->mapper->dynamicMap($toSave, $sysTable);
+        $this->dynamicEntityRepository->dynamicSave($toSaveNext);
+
+        Yii::$app->session->setFlash('success', 'Таблица успешно создана!');
+        return $this->redirect(Url::to($urlList));
     }
 }

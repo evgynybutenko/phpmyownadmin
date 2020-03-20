@@ -9,7 +9,9 @@ use yii\helpers\Html; ?>
     <?= Html::tag('p', Html::encode('Enter table name'), ['class' => 'label-new']) ?>
     <?=Html::input('text', 'tableName', '', ['class' => 'form_input']) ?><br><br>
     <?= Html::tag('p', Html::encode('Enter the number of columns'), ['class' => 'label-new']) ?>
-    <?=Html::input('text', 'col', '', ['class' => 'form_input']) ?>
+    <?=Html::input('text', 'col', '', ['class' => 'form_input']) ?><br><br>
+    <?= Html::tag('p', Html::encode('Enter description of table'), ['class' => 'label-new']) ?>
+    <?=Html::input('text', 'description', '', ['class' => 'form_input']) ?>
     <?=Html::submitButton('Next!')?>
     <?=Html::endForm()?>
 </div>

@@ -103,7 +103,6 @@ class SiteController extends MyBeforeController
         }else
         {
             $category_1 = $this->mapper->map($newCategory, new Category());
-            var_dump($category_1);die;
             $this->categoryItemRepository->save($category_1);
             Yii::$app->session->setFlash('success', 'New category was added!'); // работает (в лейауте должно быть включено виджет)
         }

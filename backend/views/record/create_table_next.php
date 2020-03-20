@@ -2,6 +2,7 @@
 
 /* @var $col string */
 /* @var $tableName string */
+/* @var $description string */
 
 $rowsLast = [];
 $url = "/record/create-last?tableName=".$tableName;
@@ -33,6 +34,7 @@ for($i = 1; $i <= $col; $i++)
     ";
 }
 ?>
+<input type="hidden" value="<?=$description?>" name="description">
 <br><br><?=Html::submitButton('Create!')?>
 <?=Html::endForm()?>
 </div>

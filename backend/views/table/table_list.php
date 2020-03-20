@@ -26,3 +26,12 @@ use yii\bootstrap\Html;
     }
     ?>
 </table>
+
+<div class="form">
+    <?=Html::beginForm('', 'post', ['class' => ''])?>
+    <b><?= Html::tag('p', Html::encode('Delete table'), ['class' => 'label-new']) ?></b>
+    <?= Html::tag('p', Html::encode('Enter table id'), ['class' => 'label-new']) ?>
+    <?=Html::input('text', 'toDelete', '', ['class' => 'form_input']) ?>&nbsp;&nbsp;
+    <?=Html::submitButton('Delete!')?>
+    <?=Html::endForm()?>
+</div>

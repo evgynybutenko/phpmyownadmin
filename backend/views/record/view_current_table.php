@@ -43,10 +43,10 @@ use yii\helpers\Html; ?>
     {
         echo "
         <p>Enter {$attribute}</p>";
-        if ($attribute == 'id')
-        {
-            echo "(не обязательное поле)<br>";
-        }
+//        if ($attribute == 'id')
+//        {
+//            echo "(не обязательное поле)<br>";
+//        }
         echo "<input type='text' name='{$attribute}' class='form_input'>
         ";
     }
